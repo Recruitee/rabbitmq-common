@@ -1039,7 +1039,7 @@ sequence_error([_ | Rest])               -> sequence_error(Rest).
 
 json_encode(Term) ->
     try
-        {ok, mochijson2:encode(Term)}
+        {ok, rabbit_json:encode(Term)}
     catch
         exit:{json_encode, E} ->
             {error, E}
@@ -1047,9 +1047,9 @@ json_encode(Term) ->
 
 json_decode(Term) ->
     try
-        {ok, mochijson2:decode(Term)}
+        {ok, rabbit_json:decode(Term)}
     catch
-        %% Sadly `mochijson2:decode/1' does not offer a nice way to catch
+        %% Sadly `rabbit_json:decode/1' does not offer a nice way to catch
         %% decoding errors...
         error:_ -> error
     end.
